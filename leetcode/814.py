@@ -20,26 +20,40 @@
 #         self.left = left
 #         self.right = right
 
-def travel(node):
-    if not node:
-        return 0
+#def travel(node):
+#    if not node:
+#        return 0
+#
+#    s_L = travel(node.left)
+#
+#    if not s_L:
+#        node.left = None
+#   
+#    s_R = travel(node.right)
+#    
+#    if not s_R:
+#        node.right = None
+#
+#    return node.val + s_L + s_R
+#
+#class Solution:
+#    def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+#        travel(root)
+#        if root.val == 0 and not root.left and not root.right:
+#            return None
+#        return root
+#
 
-    s_L = travel(node.left)
-
-    if not s_L:
-        node.left = None
-   
-    s_R = travel(node.right)
-    
-    if not s_R:
-        node.right = None
-
-    return node.val + s_L + s_R
-
+# 可以直接剪的
 class Solution:
     def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        travel(root)
+        if not root:
+            return None
+
+        root.left = self.pruneTree(root.left)
+        root.right = self.pruneTree(root.right)
+
+        
         if root.val == 0 and not root.left and not root.right:
             return None
         return root
-
