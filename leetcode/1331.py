@@ -45,3 +45,11 @@ class Solution:
 
         return [a[i] for i in arr]
 
+
+
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+
+        a = {v: k+1 for k, v in enumerate(sorted(set(arr)))}
+        return [a[i] for i in arr]
+
