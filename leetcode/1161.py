@@ -62,3 +62,40 @@ class Solution:
 
         return max([(k, sum(v)) for k, v in t.items()], key=lambda x:x[1])[0]
 
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+
+    def travel_heigh(self, node, tmp, heigh):
+
+        if heigh not in tmp:
+            tmp[heigh] = node.val
+        else:
+            tmp[heigh] += node.val
+
+
+        if node.right:
+            self.travel_heigh(node.right, tmp, heigh + 1)
+
+        if node.left:
+            self.travel_heigh(node.left, tmp, heigh + 1)
+
+
+
+
+
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        t = {}
+        self.travel_heigh(root, t, 1)
+
+        #return max([(k, sum(v)) for k, v in t.items()], key=lambda x:x[1])[0]
+
+        return max(t.items(), key=lambda x:x[1])[0]
+
